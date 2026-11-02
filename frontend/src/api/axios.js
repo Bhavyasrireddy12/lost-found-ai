@@ -1,18 +1,19 @@
+
 import axios from "axios";
 
-// Backend address (same one your current code already uses)
-export const SERVER_URL = "http://localhost:5000";
+// Deployed backend address
+export const SERVER_URL = "https://lost-found-ai-8wgl.onrender.com";
 
 // All API routes start with /api
 const api = axios.create({
   baseURL: `${SERVER_URL}/api`,
 });
 
-// Helper to build an image address from a saved file name
+// Build image address from saved file name
 export const imageUrl = (fileName) =>
   fileName ? `${SERVER_URL}/uploads/${fileName}` : "";
 
-// Before every request: add the token if we have one
+// Add token before every request
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
 
@@ -23,8 +24,7 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// After every response: if the backend says 401 (missing, invalid
-// or expired token), remove the token and tell the app to log out
+// Handle unauthorized responses
 api.interceptors.response.use(
   (response) => response,
   (error) => {
