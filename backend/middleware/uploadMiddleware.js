@@ -1,30 +1,43 @@
-
 const multer = require("multer");
-const path = require("path");
-const fs = require("fs");
+const cloudinary = require("cloudinary").v2;
+const { Readable } = require("stream");
 
-// Create uploads folder if it does not exist
-const uploadDir = path.join(__dirname, "../uploads");
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
-if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir, { recursive: true });
-}
+const storage = multer.memoryStorage();
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, uploadDir);
+const upload = multer({
+    storage,
+    limits: {
+        fileSize: 5 * 1024 * 1024
     },
+    fileFilter: (req, file, cb) => {
+        const allowed = ["image/jpeg", "image/png", "image/webp"];
 
-    filename: function (req, file, cb) {
-        const uniqueName =
-            Date.now() + "-" + Math.round(Math.random() * 1E9);
-
-        cb(null, uniqueName + path.extname(file.originalname));
+        if (allowed.includes(file.mimetype)) {
+            cb(null, true);
+        } else {
+            cb(new Error("Only JPG, PNG, and WEBP images are allowed"));
+        }
     }
 });
 
-const upload = multer({
-    storage: storage
-});
+upload.uploadToCloudinary = (file) => {
+    return new Promise((resolve, reject) => {
+        const stream = cloudinary.uploader.upload_stream(
+            { folder: "lost-found-items" },
+            (error, result) => {
+                if (error) return reject(error);
+                resolve(result);
+            }
+        );
+
+        Readable.from(file.buffer).pipe(stream);
+    });
+};
 
 module.exports = upload;
