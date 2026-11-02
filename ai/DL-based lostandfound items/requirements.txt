@@ -1,6 +1,12 @@
-opencv-python
+fastapi
+uvicorn[standard]
+python-multipart
+opencv-python-headless
 numpy
 torch
 torchvision
 transformers
 Pillow
+ultralytics
+scikit-learn
+requests
