@@ -9,9 +9,20 @@ const api = axios.create({
   baseURL: `${SERVER_URL}/api`,
 });
 
-// Build image address from saved file name
-export const imageUrl = (fileName) =>
-  fileName ? `${SERVER_URL}/uploads/${fileName}` : "";
+// Handle both Cloudinary URLs and local filenames
+export const imageUrl = (fileName) => {
+  if (!fileName) return "";
+
+  const value = String(fileName).trim();
+
+  // Cloudinary or other complete image URL
+  if (/^https?:\/\//i.test(value)) {
+    return value;
+  }
+
+  // Older locally stored image filenames
+  return `${SERVER_URL}/uploads/${value.replace(/^\/+/, "")}`;
+};
 
 // Add token before every request
 api.interceptors.request.use((config) => {
