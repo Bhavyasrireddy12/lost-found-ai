@@ -1,0 +1,11 @@
+path: yolo_dataset
+
+train: images/train
+val: images/val
+
+names:
+  0: bag
+  1: book
+  2: key
+  3: phone
+  4: earphone

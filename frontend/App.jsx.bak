@@ -1,0 +1,216 @@
+import { useState } from "react";
+import "./App.css";
+import ReportItem from "./ReportItem";
+import Login from "./Login";
+import SearchItems from "./SearchItems";
+import Matches from "./Matches";
+
+function App() {
+  const [page, setPage] = useState("home");
+
+  // Check whether user is logged in
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    !!localStorage.getItem("token")
+  );
+
+  // Login
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+    setPage("home");
+  };
+
+  // Logout
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+
+    setIsLoggedIn(false);
+    setPage("home");
+
+    alert("Logged out successfully!");
+  };
+
+  // Report Lost page
+  if (page === "lost") {
+    return (
+      <ReportItem
+        type="lost"
+        onBack={() => setPage("home")}
+      />
+    );
+  }
+
+  // Report Found page
+  if (page === "found") {
+    return (
+      <ReportItem
+        type="found"
+        onBack={() => setPage("home")}
+      />
+    );
+  }
+
+  // Login page
+  if (page === "login") {
+    return (
+      <Login
+        onLogin={handleLogin}
+        onBack={() => setPage("home")}
+      />
+    );
+  }
+
+  // Search page
+  if (page === "search") {
+    return <SearchItems />;
+  }
+
+  // AI Matches page
+  if (page === "matches") {
+    return <Matches />;
+  }
+
+  // Home page
+  return (
+    <div className="app">
+
+      <header className="navbar">
+
+        <h1>Lost & Found Campus</h1>
+
+        <nav>
+
+          <button
+            onClick={() => setPage("home")}
+          >
+            Home
+          </button>
+
+          <button
+            onClick={() => setPage("lost")}
+          >
+            Report Lost
+          </button>
+
+          <button
+            onClick={() => setPage("found")}
+          >
+            Report Found
+          </button>
+
+          <button
+            onClick={() => setPage("search")}
+          >
+            Search Items
+          </button>
+
+          <button
+            onClick={() => setPage("matches")}
+          >
+            AI Matches
+          </button>
+
+          {!isLoggedIn ? (
+            <button
+              onClick={() => setPage("login")}
+            >
+              Login
+            </button>
+          ) : (
+            <button
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
+          )}
+
+        </nav>
+
+      </header>
+
+      <main className="hero">
+
+        <h2>
+          Lost Something? Find It Faster.
+        </h2>
+
+        <p>
+          Report lost and found items on campus and use
+          AI-powered matching to find possible matches.
+        </p>
+
+        <div className="actions">
+
+          <button
+            className="primary-btn"
+            onClick={() => setPage("lost")}
+          >
+            Report Lost Item
+          </button>
+
+          <button
+            className="secondary-btn"
+            onClick={() => setPage("found")}
+          >
+            Report Found Item
+          </button>
+
+          <button
+            className="secondary-btn"
+            onClick={() => setPage("search")}
+          >
+            Search Items
+          </button>
+
+          <button
+            className="secondary-btn"
+            onClick={() => setPage("matches")}
+          >
+            View AI Matches
+          </button>
+
+        </div>
+
+      </main>
+
+      <section className="features">
+
+        <div className="feature-card">
+
+          <h3>📱 Report Items</h3>
+
+          <p>
+            Upload an image and provide details about
+            the lost or found item.
+          </p>
+
+        </div>
+
+        <div className="feature-card">
+
+          <h3>🤖 AI Matching</h3>
+
+          <p>
+            YOLO and CLIP help compare item images and
+            descriptions to find possible matches.
+          </p>
+
+        </div>
+
+        <div className="feature-card">
+
+          <h3>🔍 Search Items</h3>
+
+          <p>
+            Search lost and found items by category,
+            location and other details.
+          </p>
+
+        </div>
+
+      </section>
+
+    </div>
+  );
+}
+
+export default App;

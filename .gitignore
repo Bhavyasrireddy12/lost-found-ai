@@ -1,0 +1,27 @@
+# Secrets
+.env
+**/.env
+
+# Node dependencies
+node_modules/
+**/node_modules/
+
+# Python environment
+venv/
+**/venv/
+__pycache__/
+*.pyc
+
+# Uploaded images
+backend/uploads/
+
+# Training dataset
+ai/DL-based lostandfound items/yolo_dataset/
+
+# Local files
+.DS_Store
+# AI training datasets and generated files
+ai/DL-based lostandfound items/dataset/
+ai/DL-based lostandfound items/yolo_dataset/
+ai/DL-based lostandfound items/runs/
+ai/DL-based lostandfound items/results/

@@ -1,0 +1,1781 @@
+﻿
+===== package.json =====
+
+{
+  "name": "frontend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "axios": "^1.20.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@vitejs/plugin-react": "^6.1.1",
+    "eslint": "^10.10.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.6",
+    "globals": "^17.12.0",
+    "vite": "^8.3.0"
+  }
+}
+
+===== vite.config.js =====
+
+import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite'
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react()],
+})
+
+===== index.html =====
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>frontend</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
+
+===== C:\Users\Admin\OneDrive\Desktop\lost-found-ai\frontend\src\App.css =====
+
+.counter {
+  font-size: 16px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: var(--accent);
+  background: var(--accent-bg);
+  border: 2px solid transparent;
+  transition: border-color 0.3s;
+  margin-bottom: 24px;
+
+  &:hover {
+    border-color: var(--accent-border);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
+.hero {
+  position: relative;
+
+  .base,
+  .framework,
+  .vite {
+    inset-inline: 0;
+    margin: 0 auto;
+  }
+
+  .base {
+    width: 170px;
+    position: relative;
+    z-index: 0;
+  }
+
+  .framework,
+  .vite {
+    position: absolute;
+  }
+
+  .framework {
+    z-index: 1;
+    top: 34px;
+    height: 28px;
+    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
+      scale(1.4);
+  }
+
+  .vite {
+    z-index: 0;
+    top: 107px;
+    height: 26px;
+    width: auto;
+    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
+      scale(0.8);
+  }
+}
+
+#center {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  place-content: center;
+  place-items: center;
+  flex-grow: 1;
+
+  @media (max-width: 1024px) {
+    padding: 32px 20px 24px;
+    gap: 18px;
+  }
+}
+
+#next-steps {
+  display: flex;
+  border-top: 1px solid var(--border);
+  text-align: left;
+
+  & > div {
+    flex: 1 1 0;
+    padding: 32px;
+    @media (max-width: 1024px) {
+      padding: 24px 20px;
+    }
+  }
+
+  .icon {
+    margin-bottom: 16px;
+    width: 22px;
+    height: 22px;
+  }
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+#docs {
+  border-right: 1px solid var(--border);
+
+  @media (max-width: 1024px) {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+}
+
+#next-steps ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 8px;
+  margin: 32px 0 0;
+
+  .logo {
+    height: 18px;
+  }
+
+  a {
+    color: var(--text-h);
+    font-size: 16px;
+    border-radius: 6px;
+    background: var(--social-bg);
+    display: flex;
+    padding: 6px 12px;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: box-shadow 0.3s;
+
+    &:hover {
+      box-shadow: var(--shadow);
+    }
+    .button-icon {
+      height: 18px;
+      width: 18px;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    li {
+      flex: 1 1 calc(50% - 8px);
+    }
+
+    a {
+      width: 100%;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+  }
+}
+
+#spacer {
+  height: 88px;
+  border-top: 1px solid var(--border);
+  @media (max-width: 1024px) {
+    height: 48px;
+  }
+}
+
+.ticks {
+  position: relative;
+  width: 100%;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: -4.5px;
+    border: 5px solid transparent;
+  }
+
+  &::before {
+    left: 0;
+    border-left-color: var(--border);
+  }
+  &::after {
+    right: 0;
+    border-right-color: var(--border);
+  }
+}
+/* ================================
+   SEARCH ITEMS PAGE
+================================ */
+
+.search-page {
+  min-height: 100vh;
+  padding: 50px 60px;
+  background: #f5f7fb;
+}
+
+.search-page h2 {
+  text-align: center;
+  font-size: 34px;
+  margin-bottom: 35px;
+}
+
+/* Search controls */
+
+.search-controls {
+  max-width: 1100px;
+  margin: 0 auto 35px;
+
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+
+  flex-wrap: wrap;
+}
+
+.search-controls input,
+.search-controls select {
+  padding: 12px 14px;
+
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+
+  background: white;
+  font-size: 15px;
+
+  outline: none;
+}
+
+.search-controls input {
+  width: 280px;
+}
+
+.search-controls input:focus,
+.search-controls select:focus {
+  border-color: #2563eb;
+}
+
+.search-controls button {
+  padding: 12px 22px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #2563eb;
+  color: white;
+
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.search-controls button:hover {
+  background: #1d4ed8;
+}
+
+/* Items grid */
+
+.search-page > .item-card {
+  max-width: 1100px;
+  margin: 0 auto 25px;
+
+  display: flex;
+  gap: 25px;
+
+  background: white;
+
+  padding: 20px;
+
+  border-radius: 14px;
+
+  border: 1px solid #e5e7eb;
+
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* Item image */
+
+.item-image {
+  width: 220px;
+  height: 180px;
+
+  object-fit: cover;
+
+  border-radius: 10px;
+
+  background: #f3f4f6;
+}
+
+/* Item information */
+
+.item-details {
+  flex: 1;
+}
+
+.item-details h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+
+  font-size: 24px;
+}
+
+.item-details p {
+  margin: 8px 0;
+
+  color: #4b5563;
+
+  line-height: 1.5;
+}
+
+.item-details strong {
+  color: #1f2937;
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+  .search-page {
+    padding: 30px 20px;
+  }
+
+  .search-page h2 {
+    font-size: 28px;
+  }
+
+  .search-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-controls input {
+    width: auto;
+  }
+
+  .search-controls input,
+  .search-controls select,
+  .search-controls button {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .search-page > .item-card {
+    flex-direction: column;
+  }
+
+  .item-image {
+    width: 100%;
+    height: 220px;
+  }
+
+}
+/* =================================
+   AI MATCH RESULTS PAGE
+================================= */
+
+.matches-page {
+  min-height: 100vh;
+  padding: 50px 60px;
+  background: #f5f7fb;
+}
+
+.matches-page > h2 {
+  text-align: center;
+  font-size: 34px;
+  margin-bottom: 35px;
+  color: #1f2937;
+}
+
+.loading-text {
+  text-align: center;
+  font-size: 18px;
+  color: #6b7280;
+}
+
+.no-matches {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 40px;
+  background: white;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.no-matches h3 {
+  margin-bottom: 10px;
+}
+
+/* Match container */
+
+.matches-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Match card */
+
+.match-card {
+  background: white;
+  border-radius: 18px;
+  padding: 28px;
+  margin-bottom: 30px;
+
+  border: 1px solid #e5e7eb;
+
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.07);
+}
+
+/* Header */
+
+.match-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 25px;
+
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 18px;
+}
+
+.match-header h3 {
+  margin: 0;
+  font-size: 22px;
+  color: #1f2937;
+}
+
+/* Status */
+
+.status-badge {
+  padding: 7px 14px;
+  border-radius: 20px;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.status-badge.confirmed {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-badge.possible {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-badge.rejected {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* Lost and Found items */
+
+.match-items {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+
+.match-item {
+  padding: 20px;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+
+  background: #fafafa;
+}
+
+.match-item h4 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.match-item img {
+  width: 100%;
+  height: 220px;
+
+  object-fit: cover;
+
+  border-radius: 10px;
+
+  margin-bottom: 15px;
+
+  background: #f3f4f6;
+}
+
+.match-item h3 {
+  margin: 5px 0 12px;
+  font-size: 20px;
+}
+
+.match-item p {
+  margin: 7px 0;
+
+  color: #4b5563;
+}
+
+.match-item strong {
+  color: #1f2937;
+}
+
+/* AI score section */
+
+.ai-score-section {
+  margin-top: 30px;
+
+  padding: 25px;
+
+  border-radius: 14px;
+
+  background: #f8fafc;
+
+  text-align: center;
+}
+
+.ai-score-section > h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+/* Score circle */
+
+.score-circle {
+  width: 130px;
+  height: 130px;
+
+  margin: 0 auto 25px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: white;
+
+  border: 8px solid #2563eb;
+
+  box-shadow:
+    0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.score-circle span {
+  font-size: 25px;
+  font-weight: 700;
+  color: #2563eb;
+}
+
+/* Score details */
+
+.score-details {
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, 1fr);
+
+  gap: 12px;
+}
+
+.score-details div {
+  background: white;
+
+  padding: 14px 8px;
+
+  border-radius: 10px;
+
+  border: 1px solid #e5e7eb;
+}
+
+.score-details span {
+  display: block;
+
+  font-size: 13px;
+
+  color: #6b7280;
+
+  margin-bottom: 7px;
+}
+
+.score-details strong {
+  font-size: 16px;
+
+  color: #1f2937;
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+
+  .matches-page {
+    padding: 35px 20px;
+  }
+
+  .match-items {
+    grid-template-columns: 1fr;
+  }
+
+  .score-details {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+
+  .matches-page {
+    padding: 25px 15px;
+  }
+
+  .matches-page > h2 {
+    font-size: 27px;
+  }
+
+  .match-card {
+    padding: 18px;
+  }
+
+  .match-header {
+    align-items: flex-start;
+    gap: 12px;
+    flex-direction: column;
+  }
+
+  .score-details {
+    grid-template-columns: 1fr;
+  }
+
+  .match-item img {
+    height: 200px;
+  }
+}
+
+===== C:\Users\Admin\OneDrive\Desktop\lost-found-ai\frontend\src\App.jsx =====
+
+import { useState } from "react";
+import "./App.css";
+import ReportItem from "./ReportItem";
+import Login from "./Login";
+import SearchItems from "./SearchItems";
+import Matches from "./Matches";
+
+function App() {
+  const [page, setPage] = useState("home");
+
+  // Check whether user is logged in
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    !!localStorage.getItem("token")
+  );
+
+  // Login
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+    setPage("home");
+  };
+
+  // Logout
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+
+    setIsLoggedIn(false);
+    setPage("home");
+
+    alert("Logged out successfully!");
+  };
+
+  // Report Lost page
+  if (page === "lost") {
+    return (
+      <ReportItem
+        type="lost"
+        onBack={() => setPage("home")}
+      />
+    );
+  }
+
+  // Report Found page
+  if (page === "found") {
+    return (
+      <ReportItem
+        type="found"
+        onBack={() => setPage("home")}
+      />
+    );
+  }
+
+  // Login page
+  if (page === "login") {
+    return (
+      <Login
+        onLogin={handleLogin}
+        onBack={() => setPage("home")}
+      />
+    );
+  }
+
+  // Search page
+  if (page === "search") {
+    return <SearchItems />;
+  }
+
+  // AI Matches page
+  if (page === "matches") {
+    return <Matches />;
+  }
+
+  // Home page
+  return (
+    <div className="app">
+
+      <header className="navbar">
+
+        <h1>Lost & Found Campus</h1>
+
+        <nav>
+
+          <button
+            onClick={() => setPage("home")}
+          >
+            Home
+          </button>
+
+          <button
+            onClick={() => setPage("lost")}
+          >
+            Report Lost
+          </button>
+
+          <button
+            onClick={() => setPage("found")}
+          >
+            Report Found
+          </button>
+
+          <button
+            onClick={() => setPage("search")}
+          >
+            Search Items
+          </button>
+
+          <button
+            onClick={() => setPage("matches")}
+          >
+            AI Matches
+          </button>
+
+          {!isLoggedIn ? (
+            <button
+              onClick={() => setPage("login")}
+            >
+              Login
+            </button>
+          ) : (
+            <button
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
+          )}
+
+        </nav>
+
+      </header>
+
+      <main className="hero">
+
+        <h2>
+          Lost Something? Find It Faster.
+        </h2>
+
+        <p>
+          Report lost and found items on campus and use
+          AI-powered matching to find possible matches.
+        </p>
+
+        <div className="actions">
+
+          <button
+            className="primary-btn"
+            onClick={() => setPage("lost")}
+          >
+            Report Lost Item
+          </button>
+
+          <button
+            className="secondary-btn"
+            onClick={() => setPage("found")}
+          >
+            Report Found Item
+          </button>
+
+          <button
+            className="secondary-btn"
+            onClick={() => setPage("search")}
+          >
+            Search Items
+          </button>
+
+          <button
+            className="secondary-btn"
+            onClick={() => setPage("matches")}
+          >
+            View AI Matches
+          </button>
+
+        </div>
+
+      </main>
+
+      <section className="features">
+
+        <div className="feature-card">
+
+          <h3>ðŸ“± Report Items</h3>
+
+          <p>
+            Upload an image and provide details about
+            the lost or found item.
+          </p>
+
+        </div>
+
+        <div className="feature-card">
+
+          <h3>ðŸ¤– AI Matching</h3>
+
+          <p>
+            YOLO and CLIP help compare item images and
+            descriptions to find possible matches.
+          </p>
+
+        </div>
+
+        <div className="feature-card">
+
+          <h3>ðŸ” Search Items</h3>
+
+          <p>
+            Search lost and found items by category,
+            location and other details.
+          </p>
+
+        </div>
+
+      </section>
+
+    </div>
+  );
+}
+
+export default App;
+
+===== C:\Users\Admin\OneDrive\Desktop\lost-found-ai\frontend\src\index.css =====
+
+:root {
+  --text: #6b6375;
+  --text-h: #08060d;
+  --bg: #fff;
+  --border: #e5e4e7;
+  --code-bg: #f4f3ec;
+  --accent: #aa3bff;
+  --accent-bg: rgba(170, 59, 255, 0.1);
+  --accent-border: rgba(170, 59, 255, 0.5);
+  --social-bg: rgba(244, 243, 236, 0.5);
+  --shadow:
+    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+
+  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+  color-scheme: light dark;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #9ca3af;
+    --text-h: #f3f4f6;
+    --bg: #16171d;
+    --border: #2e303a;
+    --code-bg: #1f2028;
+    --accent: #c084fc;
+    --accent-bg: rgba(192, 132, 252, 0.15);
+    --accent-border: rgba(192, 132, 252, 0.5);
+    --social-bg: rgba(47, 48, 58, 0.5);
+    --shadow:
+      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+  }
+
+  #social .button-icon {
+    filter: invert(1) brightness(2);
+  }
+}
+
+body {
+  margin: 0;
+}
+
+#root {
+  width: 1126px;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  border-inline: 1px solid var(--border);
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+h1,
+h2 {
+  font-family: var(--heading);
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+h1 {
+  font-size: 56px;
+  letter-spacing: -1.68px;
+  margin: 32px 0;
+  @media (max-width: 1024px) {
+    font-size: 36px;
+    margin: 20px 0;
+  }
+}
+h2 {
+  font-size: 24px;
+  line-height: 118%;
+  letter-spacing: -0.24px;
+  margin: 0 0 8px;
+  @media (max-width: 1024px) {
+    font-size: 20px;
+  }
+}
+p {
+  margin: 0;
+}
+
+code,
+.counter {
+  font-family: var(--mono);
+  display: inline-flex;
+  border-radius: 4px;
+  color: var(--text-h);
+}
+
+code {
+  font-size: 15px;
+  line-height: 135%;
+  padding: 4px 8px;
+  background: var(--code-bg);
+}
+
+===== C:\Users\Admin\OneDrive\Desktop\lost-found-ai\frontend\src\Login.jsx =====
+
+import { useState } from "react";
+import axios from "axios";
+
+function Login({ onLogin, onBack }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    setErrorMessage("");
+    setLoading(true);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/users/login",
+        {
+          email: email.trim(),
+          password,
+        }
+      );
+
+      console.log("LOGIN RESPONSE:", response.data);
+
+      const token = response.data.token;
+
+      if (!token) {
+        throw new Error("Login succeeded but no token was received.");
+      }
+
+      localStorage.setItem("token", token);
+
+      alert("Login successful!");
+
+      onLogin();
+
+    } catch (error) {
+      console.error("LOGIN ERROR:", error);
+
+      const message =
+        error.response?.data?.message ||
+        error.message ||
+        "Login failed";
+
+      setErrorMessage(message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="report-page">
+
+      <h2>Login</h2>
+
+      <form onSubmit={handleSubmit}>
+
+        <label>Email</label>
+
+        <input
+          type="email"
+          placeholder="Enter your email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+
+        <label>Password</label>
+
+        <input
+          type="password"
+          placeholder="Enter your password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+
+        {errorMessage && (
+          <p style={{ color: "red" }}>
+            {errorMessage}
+          </p>
+        )}
+
+        <button
+          type="submit"
+          disabled={loading}
+        >
+          {loading ? "Logging in..." : "Login"}
+        </button>
+
+        <button
+          type="button"
+          onClick={onBack}
+        >
+          â† Back to Home
+        </button>
+
+      </form>
+
+    </div>
+  );
+}
+
+export default Login;
+
+===== C:\Users\Admin\OneDrive\Desktop\lost-found-ai\frontend\src\main.jsx =====
+
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.jsx'
+
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)
+
+===== C:\Users\Admin\OneDrive\Desktop\lost-found-ai\frontend\src\Matches.jsx =====
+
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+function Matches() {
+  const [matches, setMatches] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchMatches = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const response = await axios.get(
+        "http://localhost:5000/api/matches",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setMatches(response.data);
+    } catch (error) {
+      console.error("Match loading error:", error);
+
+      alert(
+        error.response?.data?.message ||
+        "Failed to load matches"
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchMatches();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="matches-page">
+        <h2>AI Match Results</h2>
+        <p className="loading-text">
+          Loading AI matches...
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="matches-page">
+
+      <h2>ðŸ¤– AI Match Results</h2>
+
+      {matches.length === 0 && (
+        <div className="no-matches">
+          <h3>No Matches Found</h3>
+          <p>
+            AI has not found any possible matches yet.
+          </p>
+        </div>
+      )}
+
+      <div className="matches-container">
+
+        {matches.map((match) => {
+
+          const finalScore =
+            (match.finalScore * 100).toFixed(2);
+
+          const status =
+            match.status || "possible";
+
+          return (
+            <div
+              className="match-card"
+              key={match._id}
+            >
+
+              {/* Header */}
+
+              <div className="match-header">
+
+                <h3>
+                  ðŸ¤– AI Possible Match
+                </h3>
+
+                <span
+                  className={`status-badge ${status}`}
+                >
+                  {status.toUpperCase()}
+                </span>
+
+              </div>
+
+              {/* Items */}
+
+              <div className="match-items">
+
+                {/* Lost Item */}
+
+                <div className="match-item">
+
+                  <h4>ðŸ”´ Lost Item</h4>
+
+                  {match.lostItemId?.image && (
+                    <img
+                      src={`http://localhost:5000/uploads/${match.lostItemId.image}`}
+                      alt="Lost Item"
+                    />
+                  )}
+
+                  <h3>
+                    {match.lostItemId?.title}
+                  </h3>
+
+                  <p>
+                    <strong>Category:</strong>{" "}
+                    {match.lostItemId?.category}
+                  </p>
+
+                  <p>
+                    <strong>Location:</strong>{" "}
+                    {match.lostItemId?.location}
+                  </p>
+
+                  <p>
+                    <strong>Date:</strong>{" "}
+                    {match.lostItemId?.date}
+                  </p>
+
+                  <p>
+                    <strong>Time:</strong>{" "}
+                    {match.lostItemId?.time}
+                  </p>
+
+                </div>
+
+                {/* Found Item */}
+
+                <div className="match-item">
+
+                  <h4>ðŸŸ¢ Found Item</h4>
+
+                  {match.foundItemId?.image && (
+                    <img
+                      src={`http://localhost:5000/uploads/${match.foundItemId.image}`}
+                      alt="Found Item"
+                    />
+                  )}
+
+                  <h3>
+                    {match.foundItemId?.title}
+                  </h3>
+
+                  <p>
+                    <strong>Category:</strong>{" "}
+                    {match.foundItemId?.category}
+                  </p>
+
+                  <p>
+                    <strong>Location:</strong>{" "}
+                    {match.foundItemId?.location}
+                  </p>
+
+                  <p>
+                    <strong>Date:</strong>{" "}
+                    {match.foundItemId?.date}
+                  </p>
+
+                  <p>
+                    <strong>Time:</strong>{" "}
+                    {match.foundItemId?.time}
+                  </p>
+
+                </div>
+
+              </div>
+
+              {/* AI Score */}
+
+              <div className="ai-score-section">
+
+                <h3>
+                  AI Match Score
+                </h3>
+
+                <div className="score-circle">
+
+                  <span>
+                    {finalScore}%
+                  </span>
+
+                </div>
+
+                <div className="score-details">
+
+                  <div>
+                    <span>ðŸ–¼ï¸ Image</span>
+                    <strong>
+                      {(match.imageScore * 100).toFixed(2)}%
+                    </strong>
+                  </div>
+
+                  <div>
+                    <span>ðŸ“ Text</span>
+                    <strong>
+                      {(match.textScore * 100).toFixed(2)}%
+                    </strong>
+                  </div>
+
+                  <div>
+                    <span>ðŸ“‚ Category</span>
+                    <strong>
+                      {(match.categoryScore * 100).toFixed(2)}%
+                    </strong>
+                  </div>
+
+                  <div>
+                    <span>ðŸ“ Location</span>
+                    <strong>
+                      {(match.locationScore * 100).toFixed(2)}%
+                    </strong>
+                  </div>
+
+                  <div>
+                    <span>â° Time</span>
+                    <strong>
+                      {(match.timeScore * 100).toFixed(2)}%
+                    </strong>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+          );
+        })}
+
+      </div>
+
+    </div>
+  );
+}
+
+export default Matches;
+
+===== C:\Users\Admin\OneDrive\Desktop\lost-found-ai\frontend\src\ReportItem.jsx =====
+
+import { useState } from "react";
+import axios from "axios";
+
+function ReportItem({ type }) {
+  const [formData, setFormData] = useState({
+    category: "",
+    title: "",
+    description: "",
+    location: "",
+    date: "",
+    time: "",
+    image: null,
+  });
+
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+
+    setFormData({
+      ...formData,
+      [name]: files ? files[0] : value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const data = new FormData();
+
+      data.append("type", type);
+      data.append("category", formData.category);
+      data.append("title", formData.title);
+      data.append("description", formData.description);
+      data.append("location", formData.location);
+      data.append("date", formData.date);
+      data.append("time", formData.time);
+      data.append("image", formData.image);
+
+      const token = localStorage.getItem("token");
+
+      const response = await axios.post(
+        "http://localhost:5000/api/items",
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      alert(response.data.message);
+
+    } catch (error) {
+      console.error(error);
+
+      alert(
+        error.response?.data?.message ||
+        "Failed to submit item"
+      );
+    }
+  };
+
+  return (
+    <div className="report-page">
+      <h2>
+        Report {type === "lost" ? "Lost" : "Found"} Item
+      </h2>
+
+      <form onSubmit={handleSubmit}>
+
+        <label>Category</label>
+
+        <select
+          name="category"
+          value={formData.category}
+          onChange={handleChange}
+          required
+        >
+          <option value="">Select category</option>
+          <option value="backpack">Backpack</option>
+          <option value="bottle">Bottle</option>
+          <option value="laptop">Laptop</option>
+          <option value="phone">Mobile Phone</option>
+          <option value="book">Book</option>
+          <option value="wallet">Wallet</option>
+          <option value="keys">Keys</option>
+          <option value="earphones">Earphones</option>
+          <option value="id_card">ID Card</option>
+          <option value="other">Other</option>
+        </select>
+
+        <label>Title</label>
+
+        <input
+          type="text"
+          name="title"
+          placeholder="Example: Black Wallet"
+          value={formData.title}
+          onChange={handleChange}
+          required
+        />
+
+        <label>Description</label>
+
+        <textarea
+          name="description"
+          placeholder="Describe the item..."
+          value={formData.description}
+          onChange={handleChange}
+          required
+        />
+
+        <label>Location</label>
+
+        <input
+          type="text"
+          name="location"
+          placeholder="Example: College Library"
+          value={formData.location}
+          onChange={handleChange}
+          required
+        />
+
+        <label>Date</label>
+
+        <input
+          type="date"
+          name="date"
+          value={formData.date}
+          onChange={handleChange}
+          required
+        />
+
+        <label>Time</label>
+
+        <input
+          type="time"
+          name="time"
+          value={formData.time}
+          onChange={handleChange}
+          required
+        />
+
+        <label>Item Image</label>
+
+        <input
+          type="file"
+          name="image"
+          accept="image/*"
+          onChange={handleChange}
+          required
+        />
+
+        <button type="submit">
+          Submit Report
+        </button>
+
+      </form>
+    </div>
+  );
+}
+
+export default ReportItem;
+
+===== C:\Users\Admin\OneDrive\Desktop\lost-found-ai\frontend\src\SearchItems.jsx =====
+
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+function SearchItems() {
+  const [items, setItems] = useState([]);
+  const [type, setType] = useState("");
+  const [category, setCategory] = useState("");
+  const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const fetchItems = async () => {
+    try {
+      setLoading(true);
+
+      const response = await axios.get(
+        "http://localhost:5000/api/items",
+        {
+          params: {
+            type,
+            category,
+            search,
+          },
+        }
+      );
+
+      setItems(response.data);
+    } catch (error) {
+      console.error("Search error:", error);
+
+      alert(
+        error.response?.data?.message ||
+        "Failed to load items"
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchItems();
+  }, []);
+
+  return (
+    <div className="search-page">
+
+      <h2>Search Lost & Found Items</h2>
+
+      {/* Search Controls */}
+      <div className="search-controls">
+
+        <input
+          type="text"
+          placeholder="Search item..."
+          value={search}
+          onChange={(e) =>
+            setSearch(e.target.value)
+          }
+        />
+
+        <select
+          value={type}
+          onChange={(e) =>
+            setType(e.target.value)
+          }
+        >
+          <option value="">
+            All Items
+          </option>
+
+          <option value="lost">
+            Lost
+          </option>
+
+          <option value="found">
+            Found
+          </option>
+        </select>
+
+        <select
+          value={category}
+          onChange={(e) =>
+            setCategory(e.target.value)
+          }
+        >
+          <option value="">
+            All Categories
+          </option>
+
+          <option value="backpack">
+            Backpack
+          </option>
+
+          <option value="bottle">
+            Bottle
+          </option>
+
+          <option value="laptop">
+            Laptop
+          </option>
+
+          <option value="phone">
+            Mobile Phone
+          </option>
+
+          <option value="book">
+            Book
+          </option>
+
+          <option value="wallet">
+            Wallet
+          </option>
+
+          <option value="keys">
+            Keys
+          </option>
+
+          <option value="earphones">
+            Earphones
+          </option>
+
+          <option value="id_card">
+            ID Card
+          </option>
+
+          <option value="other">
+            Other
+          </option>
+        </select>
+
+        <button onClick={fetchItems}>
+          Search
+        </button>
+
+      </div>
+
+      {/* Loading */}
+      {loading && (
+        <p>Loading items...</p>
+      )}
+
+      {/* No Results */}
+      {!loading && items.length === 0 && (
+        <p>No items found.</p>
+      )}
+
+      {/* Item List */}
+      {!loading &&
+        items.map((item) => (
+          <div
+            className="item-card"
+            key={item._id}
+          >
+
+            {/* Item Image */}
+            {item.image && (
+              <img
+                src={`http://localhost:5000/uploads/${item.image}`}
+                alt={item.title || "Item"}
+                className="item-image"
+              />
+            )}
+
+            <div className="item-details">
+
+              <h3>
+                {item.title || "Item title unavailable"}
+              </h3>
+
+              <p>
+                <strong>Type:</strong>{" "}
+                {item.type}
+              </p>
+
+              <p>
+                <strong>Category:</strong>{" "}
+                {item.category ||
+                  "Category unavailable"}
+              </p>
+
+              <p>
+                <strong>Description:</strong>{" "}
+                {item.description}
+              </p>
+
+              <p>
+                <strong>Location:</strong>{" "}
+                {item.location}
+              </p>
+
+              <p>
+                <strong>Date:</strong>{" "}
+                {item.date ||
+                  "Date unavailable"}
+              </p>
+
+              <p>
+                <strong>Time:</strong>{" "}
+                {item.time ||
+                  "Time unavailable"}
+              </p>
+
+              <p>
+                <strong>Status:</strong>{" "}
+                {item.status}
+              </p>
+
+            </div>
+
+          </div>
+        ))}
+    </div>
+  );
+}
+
+export default SearchItems;
